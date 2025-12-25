@@ -1,0 +1,85 @@
+/*
+	Вам даются таблицы:
+		1.Company,
+		2.Trip,
+		3.Passenger,
+		4.Pass_in_trip.
+	Нужно вывести:
+		1.все именя пассажиров,
+		2.названия всех авиокомпаний,
+		3.все рейсы , совершенные из city 1.
+*/
+
+CREATE TABLE Company (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	name varchar NOT NULL
+);
+
+INSERT INTO Company (name)
+	VALUES ('Don_avia'),
+	       ('Aeroflot'),
+		   ('Dale_avia'),
+		   ('air_France'),
+		   ('British_AW');
+
+
+
+CREATE TABLE Trip (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	company INT NOT NULL,
+	plane varchar NOT NULL,
+	town_from varchar NOT NULL,
+	town_to varchar NOT NULL,
+	time_out TIMESTAMP,
+	time_in TIMESTAMP,
+	CONSTRAINT t
+		FOREIGN KEY (company)
+		REFERENCES Company(id)
+);
+
+INSERT INTO Trip (company,plane,town_from,town_to)
+	VALUES (1,'Boeing','city 1','city 2'),
+	       (2,'Boeing','city 3','city 4'),
+		   (3,'Boeing','city 5','city 6'),
+		   (4,'Boeing','city 7','city 8'),
+		   (5,'Boeing','city 9','city 10');
+
+
+
+CREATE TABLE Passenger (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	name varchar
+);
+
+INSERT INTO Passenger (name)
+	VALUES ('pass 1'),
+	       ('pass 2'),
+		   ('pass 3'),
+		   ('pass 4'),
+		   ('pass 5');
+
+
+
+CREATE TABLE Pass_in_trip (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	trip INT NOT NULL,
+	passenger INT NOT NULL,
+	place varchar,
+	CONSTRAINT p_t
+		FOREIGN KEY (trip)
+		REFERENCES Trip(id),
+	CONSTRAINT p_p
+		FOREIGN KEY (passenger)
+		REFERENCES Passenger(id)
+);
+
+INSERT INTO Pass_in_trip (trip,passenger,place)
+	VALUES (1,1,'1A'),
+	       (2,4,'2A'),
+		   (3,2,'3B'),
+		   (4,5,'5B'),
+		   (5,3,'1B');
+
+SELECT name FROM Passenger;-- 1
+SELECT name FROM Company;-- 2
+SELECT * FROM Trip WHERE town_from='city 1';

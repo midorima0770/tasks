@@ -1,0 +1,8 @@
+
+/*
+
+    Problem condition in sql academy: https://sql-academy.org/en/trainer/tasks/6
+
+*/
+
+SELECT name FROM Company WHERE id IN(SELECT company FROM Trip WHERE plane='Boeing');

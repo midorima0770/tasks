@@ -1,0 +1,8 @@
+
+/*
+
+    Problem condition in sql academy: https://sql-academy.org/ru/trainer/tasks/14
+
+*/
+
+SELECT town_to FROM Trip WHERE id IN (SELECT trip FROM Pass_in_trip WHERE passenger='1');

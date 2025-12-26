@@ -1,0 +1,10 @@
+
+/*
+
+    DISTINCT — это оператор SQL, который убирает дубликаты из результата запроса и возвращает только уникальные строки.
+
+    Problem condition in sql academy: https://sql-academy.org/en/trainer/tasks/7
+
+*/
+
+SELECT DISTINCT plane FROM Trip WHERE town_to='Moscow';
